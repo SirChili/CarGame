@@ -22,10 +22,6 @@ void map()
 	system("cls");
 	for (int y = 0; y < mapHeight; y++) {
 		for (int x = 0; x < mapWidth; x++) {
-			//if the enemyY and enemyX is where the y and x is, put down enemy (for values(x,y) go through every part of map)
-			if (y == enemyY && x == enemyX) {
-				cout << "V";
-			}
 			//if mapHeight(under the map) then place character there
 			if (y == mapHeight - 1 && x == plrX) {
 				cout << "#";
@@ -33,6 +29,13 @@ void map()
 			//Draws the border if x == 0 or mapWidth
 			if (x == 0 || x == mapWidth - 1) { // "- 1" ?
 				cout << dark;
+			}
+			//if the enemyY and enemyX is where the y and x is, put down space(for values(x,y) go through every part of map)
+			if (y == enemyY && x == enemyX) {
+				cout << " ";
+			}
+			if (y == enemyY) {
+				cout << "V";
 			}
 			//if none of the if statements, space
 			else { cout << " "; }
@@ -46,7 +49,7 @@ void map()
 void enemies() {
 
 	srand(time(0));
-	enemyX = 1 + rand() % (mapWidth - 2);
+	enemyX = 1 + rand() % mapWidth;
 	enemyY = 0; //puts enemy back at top of map
 
 }
@@ -93,9 +96,10 @@ void plr() {
 		//if enemy is at minimum map height, reset the enemy
 		if (enemyY >= mapHeight) {
 			enemies();
+
 		}
 		//if enemy x is same as plr and enemy y is under map height, game over
-		if (enemyX == plrX && enemyY == mapHeight - 1)
+		if (enemyX != plrX && enemyY == mapHeight - 1)
 		{ 
 			system("cls");  
 			cout << "Game Over..."; 
@@ -103,8 +107,6 @@ void plr() {
 		}
 		
 		else { enemyY++; } //makes enemy fall every milisecond (Sleep(100))
-
-
 		Sleep(100); //1000 = 1 second | 100 = 1 milisecond
 
 	}
@@ -115,4 +117,5 @@ void plr() {
 int main() {
 
 	plr();
+
 }
