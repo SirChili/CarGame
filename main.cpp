@@ -70,6 +70,7 @@ void plr() {
 				if (plrX <= 1) {
 					system("cls");
 					cout << "Out Of Bounds...\n\nGame Over\n";
+					Sleep(1000);
 					break;
 
 				}
@@ -82,14 +83,23 @@ void plr() {
 				if (plrX >= 29) {
 					system("cls");
 					cout << "Out Of Bounds...\n\nGame Over\n";
+					Sleep(1000);
 					break;
 
 				}
 
 				plrX++;
 			}
+
 			if (key == 'q') { break; }
 
+			if (key == 'p') {
+
+				cout << "Paused\nEnter a key then Enter to Resume.\nType 'q' then Enter to quit";
+				char pause; cin >> pause;
+				if (pause == 'q') { break; }
+			
+			}
 		}
 		map();
 
@@ -100,12 +110,13 @@ void plr() {
 		}
 		//if enemy x is same as plr and enemy y is under map height, game over
 		if (enemyX != plrX && enemyY == mapHeight - 1)
-		{ 
-			system("cls");  
-			cout << "Game Over..."; 
-			break; 
+		{
+			system("cls");
+			cout << "Game Over...";
+			Sleep(1000);
+			break;
 		}
-		
+
 		else { enemyY++; } //makes enemy fall every milisecond (Sleep(100))
 		Sleep(100); //1000 = 1 second | 100 = 1 milisecond
 
