@@ -7,6 +7,7 @@
 using namespace std; //dont like using std::
 
 const char dark = 0xB2; //UDC
+const char light = 0xB0; //Another UDC
 int plrX = 15; //players position
 
 //self explanitory
@@ -15,6 +16,8 @@ const int mapWidth = 30;
 
 int enemyX;
 int enemyY;
+
+int score;
 
 //Creates map, player, and enemy
 void map()
@@ -35,7 +38,7 @@ void map()
 				cout << " ";
 			}
 			if (y == enemyY) {
-				cout << "V";
+				cout << light;
 			}
 			//if none of the if statements, space
 			else { cout << " "; }
@@ -98,7 +101,7 @@ void plr() {
 				cout << "Paused\nEnter a key then Enter to Resume.\nType 'q' then Enter to quit";
 				char pause; cin >> pause;
 				if (pause == 'q') { break; }
-			
+
 			}
 		}
 		map();
@@ -106,13 +109,15 @@ void plr() {
 		//if enemy is at minimum map height, reset the enemy
 		if (enemyY >= mapHeight) {
 			enemies();
+			score++;
 
 		}
 		//if enemy x is same as plr and enemy y is under map height, game over
 		if (enemyX != plrX && enemyY == mapHeight - 1)
 		{
 			system("cls");
-			cout << "Game Over...";
+			cout << "Game Over..." << "\n";
+			cout << "Score: " << score << "\n";
 			Sleep(1000);
 			break;
 		}
@@ -124,7 +129,6 @@ void plr() {
 
 }
 
-//Calling the functions
 int main() {
 
 	plr();
